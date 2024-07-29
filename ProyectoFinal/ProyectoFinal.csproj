@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FCB2E7BB-1E09-4351-A24C-C16EA34756DD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ProyectoFinal</RootNamespace>
+    <AssemblyName>ProyectoFinal</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Cassandra, Version=3.99.0.0, Culture=neutral, PublicKeyToken=10b231fbfc8c4b4d, processorArchitecture=MSIL">
+      <HintPath>..\packages\CassandraCSharpDriver.3.20.1\lib\net452\Cassandra.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.1.11\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.0.0\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.1.0.0\lib\netstandard1.1\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.1.0.0\lib\netstandard1.1\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Linq, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.4.1.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Expressions.4.1.0\lib\net463\System.Linq.Expressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.1.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.1.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Extensions.4.1.0\lib\net462\System.Runtime.Extensions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.4.1.0\lib\net462\System.Runtime.InteropServices.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Dataflow, Version=4.6.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Dataflow.4.6.0\lib\netstandard1.1\System.Threading.Tasks.Dataflow.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Cancellations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cancellations.Designer.cs">
+      <DependentUpon>Cancellations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckIn.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckIn.Designer.cs">
+      <DependentUpon>CheckIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CheckOut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CheckOut.Designer.cs">
+      <DependentUpon>CheckOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ClientsManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ClientsManager.Designer.cs">
+      <DependentUpon>ClientsManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HabilitarUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HabilitarUsuario.Designer.cs">
+      <DependentUpon>HabilitarUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HotelOcupacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HotelOcupacion.Designer.cs">
+      <DependentUpon>HotelOcupacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HotelsManagment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HotelsManagment.Designer.cs">
+      <DependentUpon>HotelsManagment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HotelsReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HotelsReports.Designer.cs">
+      <DependentUpon>HotelsReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainScreen.Designer.cs">
+      <DependentUpon>MainScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReservationManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReservationManager.Designer.cs">
+      <DependentUpon>ReservationManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RoomManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RoomManager.Designer.cs">
+      <DependentUpon>RoomManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsersManagment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UsersManagment.Designer.cs">
+      <DependentUpon>UsersManagment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserStory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserStory.Designer.cs">
+      <DependentUpon>UserStory.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Cancellations.resx">
+      <DependentUpon>Cancellations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckIn.resx">
+      <DependentUpon>CheckIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CheckOut.resx">
+      <DependentUpon>CheckOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ClientsManager.resx">
+      <DependentUpon>ClientsManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HabilitarUsuario.resx">
+      <DependentUpon>HabilitarUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HotelOcupacion.resx">
+      <DependentUpon>HotelOcupacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HotelsManagment.resx">
+      <DependentUpon>HotelsManagment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HotelsReports.resx">
+      <DependentUpon>HotelsReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainScreen.resx">
+      <DependentUpon>MainScreen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ReservationManager.resx">
+      <DependentUpon>ReservationManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoomManager.resx">
+      <DependentUpon>RoomManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UsersManagment.resx">
+      <DependentUpon>UsersManagment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserStory.resx">
+      <DependentUpon>UserStory.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Middleware\Middleware.csproj">
+      <Project>{28568f9e-3fdb-4d7c-b350-bd65fb55225f}</Project>
+      <Name>Middleware</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

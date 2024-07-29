@@ -1,0 +1,107 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Configuration;
+using Cassandra;
+
+namespace Data
+{
+    public class Conecction
+    {
+        private Cluster _cluster;
+        private ISession _session;
+
+        public Conecction()
+        {
+            try
+            {
+                string user = ConfigurationManager.AppSettings["CASSANDRA_USER"];
+                string pwd = ConfigurationManager.AppSettings["CASSANDRA_PASSWORD"];
+                string[] nodes = ConfigurationManager.AppSettings["CASSANDRA_NODES"].Split(',');
+                string keyspace = "hotel";
+
+                QueryOptions queryOptions = new QueryOptions().SetConsistencyLevel(ConsistencyLevel.One);
+
+                _cluster = Cluster.Builder()
+                    .AddContactPoints(nodes)
+                    .WithCredentials(user, pwd)
+                    .WithQueryOptions(queryOptions)
+                    .Build();
+                _session = _cluster.Connect(keyspace);
+
+                _session = _cluster.Connect(); 
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al conectar con Cassandra: " + ex.Message);
+            }
+        }
+        public int Login(string correo, string contrasena)
+        {
+            //hacer una busqueda para obtener la contrasena y el valor esAdminstrador a traves del correo
+            var preparedStatement = _session.Prepare("SELECT contrasena, esAdministrador FROM hotel.Usuarios WHERE correo_electronico = ? ALLOW FILTERING");
+            var boundStatement = preparedStatement.Bind(correo);
+
+            var rows = _session.Execute(boundStatement); //ejecutar el query
+
+            
+            foreach (var row in rows)
+            {
+                List<string> contrasenas = row.GetValue<List<string>>("contrasena"); //obtener las contrasenas del usuario
+
+                if (contrasenas[contrasenas.Count - 1] == contrasena) //obtener la contrasena mas actualizada del usuario
+                {
+                    bool isAdmin = row.GetValue<bool>("esadministrador"); //obtener si el usuario es administrador para darle acceso 
+                    return isAdmin ? 2 : 1;  //si el usuario es administrador retornar 2 y si no lo es retornar 1
+                } 
+            }
+            return 0; //si el usuario no es encontrado retornar 0
+        }
+
+        public void Register(string email, string password, string name, string nomina, string birthday, string residence,
+    string homePhone, string personalPhone, bool isAdmin)
+        {
+            try
+            {
+                // Preparar la consulta de inserción
+                var preparedStatement = _session.Prepare("INSERT INTO hotel.Usuarios (id, correo_electronico, contrasena, nombre_completo, numero_nomina, fecha_nacimiento, domicilio, telefono_casa, telefono_celular, esAdministrador) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+                // Crear un nuevo UUID para el id
+                Guid id = Guid.NewGuid();
+
+                // Generar una lista de contraseñas con la contraseña proporcionada
+                List<string> contrasena = new List<string> { password };
+
+                // Convertir la fecha de nacimiento de string a LocalDate
+                LocalDate fechaNacimiento = LocalDate.Parse(birthday);
+
+                // Enlazar los valores a la consulta preparada
+                var boundStatement = preparedStatement.Bind(id, email, contrasena, name, nomina, fechaNacimiento, residence, homePhone, personalPhone, isAdmin);
+
+                // Ejecutar la consulta
+                _session.Execute(boundStatement);
+
+                Console.WriteLine("Registro exitoso.");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al registrar usuario en Cassandra: " + ex.Message);
+            }
+        }
+
+
+        // Método para obtener la sesión de conexión
+        public ISession GetSession()
+        {
+            return _session;
+        }
+
+        // Método para cerrar la conexión
+        public void Close()
+        {
+            _cluster?.Dispose();
+        }
+    }
+}
